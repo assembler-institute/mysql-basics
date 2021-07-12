@@ -17,7 +17,7 @@ WHERE dept_no = (
             FROM dept_emp
             GROUP BY dept_no
         ) D
-    )DD
+    ) DD
 );
 
 -- 2nd way
