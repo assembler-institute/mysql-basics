@@ -37,8 +37,13 @@ SELECT * FROM titles
 WHERE YEAR(from_date) IN (2019);
 
 -- Select only the name of the employees in capital letters
+-- 1st way
 SELECT * FROM employees
 WHERE BINARY(first_name) = UPPER(first_name);
+
+-- 2nd way
+SELECT * FROM employees
+WHERE UPPER(first_name) LIKE BINARY first_name;
 
 -- Select the name, surname and name of the current department 
 -- of each employee
