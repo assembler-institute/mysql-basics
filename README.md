@@ -13,3 +13,18 @@ This repository contains only the following files:
 - **_README.md_**: this explanatory file.
 - **_employees.sql_**: file containing an example database provided by the official MySQL team, to import and use in our exercise.
 - **_queries.sql_**: file where we recorded all the necessary queries executed to fulfill this exercise.
+
+### ⭐ Solution
+
+On the repository you can find the file **_mysolution.sql_** which contains the solution of the pill. In order to run the solution, follow those steps:
+
+- Open your terminal
+- Change into **_mysolution.sql_** directory
+- Start MariaDB
+- Run _source_ command:
+
+```
+source mysolution.sql
+```
+
+
