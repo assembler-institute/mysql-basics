@@ -8,24 +8,24 @@ USE employees;
 
 -- Inserting one test employee
 INSERT INTO employees (emp_no, birth_date, first_name, last_name, gender, hire_date)
-values (1, '1980-03-20', 'Andres', 'Genova', 'M', '2019-12-03'); -- 1 Marketing & 2 Sales
+values (1, '1980-03-20', 'Andres', 'Genova', 'M', '2019-12-03');
 
--- Inserting 15 employees (3 with the same name)
+-- Inserting 14 employees (3 with the same name)
 INSERT INTO employees (emp_no, birth_date, first_name, last_name, gender, hire_date)
-values (2, '1981-12-24', 'Surya', 'Hrodger', 'F', '1998-02-13'), -- 4 Engineering & 6 finance
-(3, '1981-12-24', 'Deepa', 'Gofraidh', 'F', '2000-12-11'), -- 3 Purchasing & 5 Administration
-(4, '1984-01-12', 'Stanley', 'Phương', 'M', '2002-12-05'), -- 4 Engineering & 5 Administration
-(5, '1985-02-26', 'Adalberto', 'Bojidar', 'M', '2004-07-26'), -- 3 Purchasing & 6 Finance
-(6, '1986-09-02', 'Arseni', 'Kehinde', 'F', '2004-10-08'), -- 1 Marketing & 3 Purchasing
-(7, '1987-04-28', 'Tomas', 'Torny', 'M', '2005-06-13'), -- 2 Sales & 1 Marketing
-(8, '1987-06-11', 'Joanna', 'Peredur', 'F', '2006-09-02'), -- 4 Engineering & 6 Finance
-(9, '1987-07-22', 'Cat', 'Ivet', 'F', '2006-11-10'), -- 3 Purchasing 5 Administration
-(10, '1988-06-17', 'Tomas', 'Iðunn', 'M', '2008-07-02'), -- 4 Engineering
-(11, '1989-01-23', 'Quirijn', 'Tadesse', 'M', '2013-06-20'), -- 5 Administration & 6 Finance
-(12, '1991-12-19', 'Evandrus', 'Daria', 'F', '2013-07-29'), -- 1 Marketing
-(13, '1993-10-12', 'Tomas', 'Andréia', 'M', '2013-09-01'), -- 2 Sales
-(14, '1995-05-10', 'Metehan', 'Mukhtar', 'M', '2016-03-29'), -- 3 Purchasing
-(15, '1995-06-19', 'Kallistrate', 'Muhsina', 'F', '2016-09-05'); -- 5 Administration
+values (2, '1981-12-24', 'Surya', 'Hrodger', 'F', '1998-02-13'),
+(3, '1981-12-24', 'Deepa', 'Gofraidh', 'F', '2000-12-11'),
+(4, '1984-01-12', 'Stanley', 'Phương', 'M', '2002-12-05'),
+(5, '1985-02-26', 'Adalberto', 'Bojidar', 'M', '2004-07-26'),
+(6, '1986-09-02', 'Arseni', 'Kehinde', 'F', '2004-10-08'),
+(7, '1987-04-28', 'Tomas', 'Torny', 'M', '2005-06-13'),
+(8, '1987-06-11', 'Joanna', 'Peredur', 'F', '2006-09-02'),
+(9, '1987-07-22', 'Cat', 'Ivet', 'F', '2006-11-10'),
+(10, '1988-06-17', 'Tomas', 'Iðunn', 'M', '2008-07-02'),
+(11, '1989-01-23', 'Quirijn', 'Tadesse', 'M', '2013-06-20'),
+(12, '1991-12-19', 'Evandrus', 'Daria', 'F', '2013-07-29'),
+(13, '1993-10-12', 'Tomas', 'Andréia', 'M', '2013-09-01'),
+(14, '1995-05-10', 'Metehan', 'Mukhtar', 'M', '2016-03-29'),
+(15, '1995-06-19', 'Kallistrate', 'Muhsina', 'F', '2016-09-05');
 
 -- Inserting salaries
 INSERT INTO salaries (emp_no, salary, from_date, to_date)
