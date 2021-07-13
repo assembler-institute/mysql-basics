@@ -11,7 +11,7 @@ Intro pill which served as our first contact with the DBMS "MySQL", where we set
 This repository contains the following files:
 
 - **_insert.sql_**: all exercices related to the INSERT SQL command and data entry.
-- **_update_**: all exercices related to the UPDATE SQL command and the data modification.
-- **_select_**: all exercices related to the SELECT SQL command and the data filtering and selection.
-- **_delete_**: all exercices related to the DELETE SQL command and the elimination of data.
+- **_update.sql_**: all exercices related to the UPDATE SQL command and the data modification.
+- **_select.sql_**: all exercices related to the SELECT SQL command and the data filtering and selection.
+- **_delete.sql_**: all exercices related to the DELETE SQL command and the elimination of data.
 - **_employees.sql_**: file containing an example database provided by the official MySQL team, to import and use in our exercise.
