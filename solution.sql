@@ -229,7 +229,9 @@ SELECT DISTINCT first_name FROM employees;
 -- 1.5.4 DELETE DATA
 -- Eliminate all employees with a salary greater than 20,000
 DELETE FROM employees WHERE emp_no IN (
-	SELECT emp_no FROM salaries WHERE salary > 20000
+	SELECT emp_no FROM salaries
+	WHERE salary > 20000
+	AND CURRENT_DATE() BETWEEN from_date AND to_date;
 );
 
 -- Remove the department that has more employees
