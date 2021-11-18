@@ -20,17 +20,20 @@ VALUES
   (15,"1990-06-03","John","Le","M","2019-06-29");
 
 -- With salaries that are between a range of 5,000 and 50,000.
-
 -- 5 employees must have at least two salaries in different ranges of dates and different amounts.
+
 INSERT INTO salaries (emp_no,salary,from_date,to_date)
 VALUES
   (1,29018,"2019-04-23","2020-12-31"),
 	(1,39018,"2021-01-01","2021-12-31"),
   (2,18652,"2019-10-16","2020-12-31"),
-	(2,28652,"2020-12-31","2021-12-31"),
-  (3,25868,"2020-05-09","2021-12-31"),
-  (4,40815,"2020-06-27","2021-12-31"),
-  (5,38351,"2020-02-12","2021-12-31"),
+	(2,28652,"2021-01-01","2021-12-31"),
+	(3,25868,"2020-05-09","2020-12-31"),
+  (3,30868,"2021-01-01","2021-12-31"),
+  (4,40815,"2020-06-27","2020-12-31"),
+	(4,45815,"2021-01-01","2021-12-31"),
+  (5,38351,"2020-02-12","2020-12-31"),
+	(5,45351,"2021-01-01","2021-12-31"),
   (6,16000,"2020-01-01","2021-12-31"),
   (7,16000,"2020-08-21","2021-12-31"),
   (8,16000,"2019-04-12","2021-12-31"),
@@ -96,6 +99,16 @@ VALUES
 
 INSERT INTO titles (emp_no, title, from_date, to_date)
 VALUES
+	(1,"Bussiness Administration Licenciate","2015-09-15","2019-06-31"),
+  (2,"Bussiness Administration Licenciate","2015-09-15","2019-06-31"),
+  (3,"Bussiness Administration Licenciate","2015-09-15","2019-06-31"),
+  (4,"Bussiness Administration Licenciate","2015-09-15","2019-06-31"),
+  (5,"Bussiness Administration Licenciate","2016-09-15","2020-06-31"),
+  (6,"IT Technician Licenciate","2015-01-15","2019-06-31"),
+  (7,"IT Technician Licenciate","2016-08-15","2020-06-31"),
+  (8,"IT Technician Licenciate","2016-04-15","2010-06-31"),
+  (9,"IT Technician Licenciate","2015-08-15","2019-06-31"),
+  (10,"Commerce & Economy Licenciate ","2020-04-17","2021-12-31"),
 	(11, "MBA", "2020-12-15", "2021-06-15"),
 	(12, "MBA", "2020-12-15", "2021-06-15"),
 	(13, "MBA", "2020-12-15", "2021-06-15"),
@@ -215,7 +228,9 @@ SELECT DISTINCT first_name FROM employees;
 
 -- 1.5.4 DELETE DATA
 -- Eliminate all employees with a salary greater than 20,000
-DELETE FROM employees WHERE salary > 20000;
+DELETE FROM employees WHERE emp_no IN (
+	SELECT emp_no FROM salaries WHERE salary > 20000
+);
 
 -- Remove the department that has more employees
 DELETE FROM departments WHERE dept_no = (
@@ -239,7 +254,6 @@ DELETE FROM departments WHERE dept_no = (
 		)
 	) AS max_num_of_employees
 );
-
 
 
 
