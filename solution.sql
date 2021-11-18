@@ -22,3 +22,113 @@ INSERT INTO employees VALUES(18, '1969-10-26', 'Jim', 'James', 'F', '2004-05-08'
 -- salaries
 INSERT INTO salaries VALUES(4,'7000','2007-10-12', '2008-09-01');
 
+--add employee to a department
+INSERT INTO dept_emp VALUES(1, 'd-04', '2007-12-12', '2009-10-10');
+
+--add five employee to managers table
+INSERT INTO dept_manager VALUES(11, 'd-01', '2005-10-10', '2005-20-20');
+
+--add titles to the employees
+INSERT INTO titles VALUES (3, 'Degree in Science', '2000-02-02', '2004-05-05');
+
+
+--update an employee name by name and more params
+UPDATE employees SET first_name = 'gabee' WHERE emp_no = 13 AND last_name = 'Lewis'AND birth_date = '1978-11-03';
+
+--update all departments name
+UPDATE departments SET dept_name = 'Accountancy-d03' WHERE dept_no = 'd-03';
+UPDATE departments SET dept_name = 'Human-Resources-d04' WHERE dept_no = 'd-04';
+UPDATE departments SET dept_name = 'Customer-Support-d05' WHERE dept_no = 'd-05';
+UPDATE departments SET dept_name = 'Quality-control-d02' WHERE dept_no = 'd-02';
+UPDATE departments SET dept_name = 'Sales-d01' WHERE dept_no = 'd-01';
+
+
+--Get Data
+
+--Select all employees with a salary greater than 20,000
+SELECT * FROM salaries WHERE salary > 20000;
+
+--Select all employees with a salary below 10,000
+SELECT * FROM salaries WHERE salary < 10000;
+
+--Select all employees who have a salary between 14.000 and 50,000
+SELECT * FROM salaries WHERE salary BETWEEN 14000 AND 50000;
+
+--select number of all employees
+SELECT COUNT(*) FROM employees;
+
+--select employees that work in more than one department
+SELECT emp_no, COUNT(*)
+FROM dept_emp
+GROUP BY emp_no HAVING COUNT(*)>1;
+--Result:
++--------+----------+
+| emp_no | COUNT(*) |
++--------+----------+
+|      1 |        2 |
+|      2 |        2 |
+|      4 |        2 |
+|      5 |        2 |
+|      9 |        2 |
+|     11 |        2 |
+|     12 |        2 |
+|     14 |        2 |
+|     17 |        2 |
+|     18 |        2 |
++--------+----------+
+
+--Select the titles of the year 2019
+SELECT * FROM titles WHERE from_date BETWEEN '2019-01-01' AND '2019-12-12';
+
+--Select only the name of the employees in capital letters
+SELECT UCASE(first_name) FROM employees;
+--Result:
++-------------------+
+| UCASE(first_name) |
++-------------------+
+| MICHAEL           |
+| ANDY              |
+| DWIGHT            |
+| PAM               |
+| KELLY             |
+| JIM               |
+| CREED             |
+| ANGELA            |
+| RYAN              |
+| TOBY              |
+| KEVIN             |
+| GABEE             |
+| DARRYL            |
+| PHYLLIS           |
+| KELLY             |
+| MICHAEL           |
+| JIM               |
++-------------------+
+
+--Select the name, surname and name of the current department of each employee
+SELECT employees.first_name, employees.last_name, dept_emp.dep_no FROM employees INNER JOIN dept_empt ON employees.emp_no = dept_emp.emp_no;
+
+
+--Select the name, surname and number of times the employee has worked as a manager
+SELECT COUNT(dept_manager.emp_no), employees.first_name, employees.last_name FROM dept_manager INNER JOIN employees ON dept_manager.emp_no = employees.emp_no GROUP BY dept_manager.emp_no HAVING COUNT(dept_manager.emp_no)>0;
+
+
+-- Select the name without any being repeated.
+SELECT DISTINCT first_name FROM employees;
+
+--Delete all employees with a salary greater than 20,000
+DELETE employees, salaries
+FROM employees JOIN salaries 
+ON employees.emp_no = salaries.emp_no 
+WHERE salaries.salary > 20000;
+
+--Remove the department that has more employees
+  DELETE FROM departments 
+  WHERE dept_no = (
+    SELECT dept_no 
+    FROM dept_emp 
+    WHERE to_date >= CURDATE() 
+    GROUP BY dept_no
+    ORDER BY COUNT(DISTINCT emp_no) DESC 
+    LIMIT 1
+  );
