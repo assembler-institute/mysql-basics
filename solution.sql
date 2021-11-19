@@ -66,6 +66,8 @@ values
     (15, 31000, '2021-09-29', '2021-09-30'),
     (15, 49999.99, '2021-10-01', now()); --arreglat estava malament el format de la data
 
+-- dia 18.11.21 he fet insert into salaries values (18, 50000, '2021-15-11', curdate()); la data malament MM mes he posat 15
+
 --table departments:
 
     INSERT INTO
@@ -244,23 +246,38 @@ WHERE dept_emp.to_date
 BETWEEN '2021-11-01' AND now(); --solució gonzalo no funciona la data estava sense cometes i fa una resta
 
 --
+-- estava fet amb from_date  --canviem from_date to_date
+
+--[l'arnau s'em repteix no se perque si faig from_date] té mes sentit to_date volem el departament actual
+
+--les dues subconsultes em tornen 16 rows el emp_no = 5  arnau amb surt 2 cops amb les dues subconsultes WTF?! 
+
+--la segona subconsulta amb torna 15 rows
 
 SELECT e.first_name, e.last_name, d.dept_name
 FROM employees as e 
-JOIN (
-    SELECT emp_no, dept_no, from_date 
-    FROM dept_emp 
-    WHERE from_date IN (
-    SELECT MAX(from_date) 
-    FROM dept_emp 
-    GROUP BY emp_no
-    )
-) recent_depts ON e.emp_no = recent_depts.emp_no 
+JOIN 
+(select emp_no, dept_no, from_date, MAX(to_date) 
+from dept_emp group by emp_no) --la meva solucio mes sintetica
+-- (
+--     SELECT emp_no, dept_no, to_date 
+--     FROM dept_emp 
+--     WHERE to_date IN (
+--     SELECT MAX(to_date) 
+--     FROM dept_emp 
+--     GROUP BY emp_no
+--     )
+recent_depts ON e.emp_no = recent_depts.emp_no 
 JOIN departments as d ON recent_depts.dept_no = d.dept_no 
-ORDER BY e.emp_no; --l'arnau s'em repteix no se perque
+ORDER BY e.last_name; 
 
+-- Only showing employees who are currently assigned to a department (to_date = now() o curdate())
 
--- Only showing employees who are currently assigned to a department
+--(podria fer curdate com a end_date en comptes de now() i no tindria el bug de el dia seguent s'ha quedat grabada la data 
+--del now() d'aquell dia?) 
+--[amb els joins si no te departament ja no son registres coicidents 
+--per tant ni m'apareixen] em torna el mateix que lo anterior fet amb to_date
+--funciona bé no entenc curdate() i now() perque no peta si el now fet ahir no es el mateix que avui i diem to_date >=curdate()!!
 
 SELECT E.first_name, E.last_name, D.dept_name
 FROM employees E 
@@ -274,11 +291,11 @@ WHERE to_date IN (
     GROUP BY emp_no   )
 ) recent_depts ON E.emp_no = recent_depts.emp_no 
 JOIN departments D ON recent_depts.dept_no = D.dept_no 
-ORDER BY E.emp_no; --funciona bé no l'entenc
+ORDER BY E.last_name; 
 
 
 --Select the name, surname and number of times the employee has worked as a manager !! la m creem una nova taula virtual i efimera nomes
---existeix durant la consulta canvio m per manager
+--existeix durant la consulta canvio m per manager 
 
 SELECT e.first_name, e.last_name, manager.times_manager 
 FROM employees as e 
@@ -302,8 +319,17 @@ DELETE FROM employees
     SELECT e.emp_no 
     FROM employees as e 
     JOIN salaries s ON e.emp_no = s.emp_no 
-    WHERE s.salary > 20000 AND s.to_date >= CURDATE() 
-    ); --funcio predefinida de SQL
+    WHERE s.salary > 20000 --AND s.to_date >= CURDATE() 
+    );
+
+--solucio adrian
+
+DELETE FROM employees 
+    WHERE emp_no IN (
+    SELECT emp_no from salaries
+    WHERE s.salary > 20000
+    AND CURRENT_DATE() BETWEEN from_date AND to_date;
+    );
 
 --Remove the department that has more employees
 
@@ -314,5 +340,17 @@ WHERE dept_no = (
     WHERE to_date >= CURDATE() 
     GROUP BY dept_no
     ORDER BY COUNT(DISTINCT emp_no) DESC 
+    LIMIT 1
+);
+
+--solucio pau 
+
+DELETE FROM departments 
+WHERE dept_no = (
+    SELECT dept_no 
+    FROM dept_emp 
+    WHERE to_date >= CURDATE() 
+    GROUP BY dept_no
+    ORDER BY COUNT(DISTINCT emp_no) DESC
     LIMIT 1
 );
