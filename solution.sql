@@ -124,8 +124,8 @@ UPDATE employees SET first_name = "Frank" WHERE first_name="Mohammad" AND last_n
 UPDATE departments SET dept_name = CONCAT(dept_name, " Department") WHERE dept_name NOT LIKE "% Department";
 
 -- 1.5.3 GET DATA
--- Select all employees with a salary greater than 20,000
 
+-- Select all employees with a salary greater than 20,000
 -- With displayed salary
 SELECT 
 	CONCAT(first_name, " ", last_name) AS employee,
@@ -147,6 +147,7 @@ WHERE emp_no IN (
 );
 
 -- Select all employees with a salary below 10,000
+-- With displayed salary
 SELECT 
 	CONCAT(first_name, " ", last_name) AS employee,
 	salary
@@ -167,6 +168,7 @@ WHERE emp_no IN (
 );
 
 -- Select all employees who have a salary between 14.00 and 50,000
+-- With displayed salary
 SELECT 
 	CONCAT(first_name, " ", last_name) AS employee,
 	salary
@@ -235,13 +237,12 @@ DELETE FROM employees WHERE emp_no IN (
 );
 
 -- Remove the department that has more employees
-DELETE FROM departments WHERE dept_no = (
+DELETE FROM departments WHERE dept_no IN (
 	SELECT dept_no FROM (
 		SELECT 
 			dept_no,
 			COUNT(emp_no) AS num_of_employees
-		FROM departments
-		JOIN dept_emp USING (dept_no)
+		FROM dept_emp
 		GROUP BY dept_no
 		HAVING COUNT(emp_no) = (
 			SELECT 
@@ -249,14 +250,21 @@ DELETE FROM departments WHERE dept_no = (
 			FROM (
 				SELECT 
 					dept_no, COUNT(emp_no) AS num_of_employees
-				FROM departments
-				JOIN dept_emp USING (dept_no)
+				FROM dept_emp
 				GROUP BY dept_no
 			) AS num_of_employees
 		)
 	) AS max_num_of_employees
 );
 
+DELETE FROM departments WHERE dept_no = (
+	SELECT 
+		dept_no
+	FROM dept_emp
+	GROUP BY dept_no
+	ORDER BY COUNT(emp_no) DESC
+	LIMIT 1
+);
 
 
 
