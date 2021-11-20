@@ -2,14 +2,21 @@
 
 _MySQL, SQL language, setting environment variables._
 
-## 📔 Description
+## Description
 
-Intro pill which served as our first contact with the DBMS "MySQL", where we set an environment variable to be able to run the program from the command line, imported an example database from a ".sql" file provided by the official MySQL team, and executed some queries to play around with a DB and to getting familiar with the SQL language.
+This pill will serve as our first contact with the DBMS "MySQL". The pill is divided into 2 separated parts. While the first part (employees.sql file) will display the schema of the database, the other - "queries" folder will include 4 sub-files which consists of queries according to different actions such as DELETE, INSERT, SELECT and UPDATE.
 
-### 📂 Content
+### Prerequisite
 
-This repository contains only the following files:
+- Install MySQL environment: MySQL(XAMPP) or MtSQL WorkBench
 
-- **_README.md_**: this explanatory file.
-- **_employees.sql_**: file containing an example database provided by the official MySQL team, to import and use in our exercise.
-- **_queries.sql_**: file where we recorded all the necessary queries executed to fulfill this exercise.
+### Technologies used
+
+- MySQL
+
+### Resources
+
+- [Official MySQL](https://www.mysql.com/)
+- [W3Schools SQL](https://www.w3schools.com/sql/sql_syntax.asp)
+- [Install MySQL](https://dev.mysql.com/downloads/installer/)
+- [SQL Query Validator](https://www.eversql.com/sql-syntax-check-validator/)
