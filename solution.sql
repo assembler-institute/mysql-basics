@@ -92,3 +92,167 @@ UPDATE employees SET first_name = "Camila" WHERE  first_name = "Ramon" AND last_
 UPDATE departments SET dept_name = "New Sales" WHERE dept_no = "A01";
 UPDATE departments SET dept_name = "New Accountancy" WHERE dept_no = "A04";
 UPDATE departments SET dept_name = "New Marketing" WHERE dept_no = "A07";
+
+SELECT * FROM salaries WHERE salary > 20000;
++--------+--------+------------+------------+
+| emp_no | salary | from_date  | to_date    |
++--------+--------+------------+------------+
+|      3 |  41000 | 2018-04-19 | 0000-00-00 |
+|      4 |  23000 | 2016-02-17 | 2018-03-17 |
+|      4 |  41000 | 2018-03-18 | 0000-00-00 |
+|      9 |  28000 | 2016-02-18 | 2016-02-09 |
+|      9 |  41000 | 2019-02-10 | 0000-00-00 |
+|     10 |  30000 | 2014-06-30 | 2019-02-09 |
+|     10 |  47000 | 2019-02-10 | 0000-00-00 |
+|     11 |  41000 | 2019-01-11 | 0000-00-00 |
+|     12 |  25000 | 2018-11-06 | 0000-00-00 |
+|     13 |  25000 | 2018-05-06 | 0000-00-00 |
+|     14 |  30000 | 2017-10-02 | 2019-02-09 |
+|     14 |  40000 | 2019-02-10 | 0000-00-00 |
+|     15 |  25000 | 2018-01-07 | 0000-00-00 |
+
+
+SELECT * FROM salaries WHERE salary < 20000;
++--------+--------+------------+------------+
+| emp_no | salary | from_date  | to_date    |
++--------+--------+------------+------------+
+|      2 |  10000 | 2020-08-08 | 0000-00-00 |
+|      3 |  15000 | 2015-04-18 | 2018-04-18 |
+|      6 |  10000 | 2020-01-04 | 0000-00-00 |
+|      7 |  18000 | 2017-02-21 | 0000-00-00 |
+|      8 |  10000 | 2020-04-27 | 0000-00-00 |
+|     16 |  10000 | 2020-08-12 | 0000-00-00 |
++--------+--------+------------+------------+
+
+SELECT * FROM salaries WHERE salary < 50000 AND salary > 21000;
++--------+--------+------------+------------+
+| emp_no | salary | from_date  | to_date    |
++--------+--------+------------+------------+
+|      3 |  41000 | 2018-04-19 | 0000-00-00 |
+|      4 |  23000 | 2016-02-17 | 2018-03-17 |
+|      4 |  41000 | 2018-03-18 | 0000-00-00 |
+|      9 |  28000 | 2016-02-18 | 2016-02-09 |
+|      9 |  41000 | 2019-02-10 | 0000-00-00 |
+|     10 |  30000 | 2014-06-30 | 2019-02-09 |
+|     10 |  47000 | 2019-02-10 | 0000-00-00 |
+|     11 |  41000 | 2019-01-11 | 0000-00-00 |
+|     12 |  25000 | 2018-11-06 | 0000-00-00 |
+|     13 |  25000 | 2018-05-06 | 0000-00-00 |
+|     14 |  30000 | 2017-10-02 | 2019-02-09 |
+|     14 |  40000 | 2019-02-10 | 0000-00-00 |
+|     15 |  25000 | 2018-01-07 | 0000-00-00 |
++--------+--------+------------+------------+
+
+SELECT COUNT(*) FROM employees;
++----------+
+| COUNT(*) |
++----------+
+|       16 |
++----------+
+
+SELECT emp_no, COUNT(*) FROM dept_emp GROUP BY emp_no HAVING COUNT(*)>1;
++--------+----------+
+| emp_no | COUNT(*) |
++--------+----------+
+|      2 |        2 |
+|      5 |        2 |
+|      6 |        2 |
+|      7 |        2 |
+|      8 |        2 |
+|     12 |        2 |
+|     13 |        2 |
+|     15 |        2 |
+|     16 |        2 |
++--------+----------+
+
+SELECT * FROM titles WHERE to_date BETWEEN "2019-01-01" AND "2019-12-31";
++--------+--------------------+------------+------------+
+| emp_no | title              | from_date  | to_date    |
++--------+--------------------+------------+------------+
+|      2 | Degree in Business | 2015-09-12 | 2019-04-23 |
+|      5 | Degree in Business | 2015-09-12 | 2019-04-23 |
+|      7 | Degree in Business | 2015-09-12 | 2019-04-23 |
+|      8 | Degree in Business | 2015-09-12 | 2019-04-23 |
+|     12 | Degree in Business | 2015-09-12 | 2019-04-23 |
+|     17 | Degree in Business | 2015-09-12 | 2019-04-23 |
++--------+--------------------+------------+------------+
+
+SELECT UCASE(first_name) FROM employees;
++-------------------+
+| UCASE(first_name) |
++-------------------+
+| JOSEP             |
+| JUAN              |
+| SARA              |
+| JOSEP             |
+| JOSEP             |
+| MARIA             |
+| DIANA             |
+| FERNANDO          |
+| CAMILA            |
+| FLORENCIA         |
+| CAMILA            |
+| RAMIRO            |
+| LIONEL            |
+| MARIA             |
+| WISIN             |
+| ARNOLD            |
++-------------------+
+
+SELECT employees.first_name, employees.last_name, dept_emp.dept_no FROM employees INNER JOIN dept_emp ON employees.emp_no = dept_emp.emp_no;
++------------+------------+---------+
+| first_name | last_name  | dept_no |
++------------+------------+---------+
+| Josep      | Romero     | A01     |
+| Josep      | Romero     | A04     |
+| Josep      | Llagostera | A01     |
+| Josep      | Llagostera | A04     |
+| Josep      | Vilagut    | A01     |
+| Josep      | Vilagut    | A04     |
+| Maria      | Cano       | A04     |
+| Maria      | Cano       | A07     |
+| Diana      | Benedetto  | A04     |
+| Diana      | Benedetto  | A07     |
+| Camila     | Artegui    | A01     |
+| Camila     | Artegui    | A07     |
+| Ramiro     | Cuernavaca | A01     |
+| Ramiro     | Cuernavaca | A04     |
+| Maria      | Dubois     | A01     |
+| Maria      | Dubois     | A04     |
+| Wisin      | Yandel     | A01     |
+| Wisin      | Yandel     | A04     |
++------------+------------+---------+
+
+SELECT COUNT(dept_manager.emp_no), employees.first_name, employees.last_name FROM dept_manager INNER JOIN employees ON dept_manager.emp_no = employees.emp_no GROUP BY dept_manager.emp_no HAVING COUNT(dept_manager.emp_no)>0;
++----------------------------+------------+-------------+
+| COUNT(dept_manager.emp_no) | first_name | last_name   |
++----------------------------+------------+-------------+
+|                          1 | Juan       | Fernandez   |
+|                          1 | Sara       | Montcada    |
+|                          1 | Fernando   | Ballesteros |
+|                          1 | Camila     | Gonzalez    |
+|                          1 | Florencia  | De Vicentis |
+|                          1 | Lionel     | Messi       |
++----------------------------+------------+-------------+
+
+SELECT DISTINCT first_name FROM employees;
++------------+
+| first_name |
++------------+
+| Josep      |
+| Juan       |
+| Sara       |
+| Maria      |
+| Diana      |
+| Fernando   |
+| Camila     |
+| Florencia  |
+| Ramiro     |
+| Lionel     |
+| Wisin      |
+| Arnold     |
++------------+
+
+ DELETE employees, salaries FROM employees JOIN salaries ON employees.emp_no = salaries.emp_no WHERE salaries.salary > 20000;
+
+DELETE departments FROM departments JOIN dept_emp ON departments.dept_no = dept_emp.dept_no WHERE COUNT()
