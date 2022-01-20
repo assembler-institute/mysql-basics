@@ -146,3 +146,22 @@ CREATE OR REPLACE VIEW current_dept_emp AS
         INNER JOIN dept_emp_latest_date l
         ON d.emp_no=l.emp_no AND d.from_date=l.from_date AND l.to_date = d.to_date;
 
+INSERT INTO 
+    employees (emp_no, birth_date, first_name, last_name, gender, hire_date) 
+    values 
+      (2, '2000-06-15', 'John', 'Smith', 'M', '2020-08-01'), 
+      (3, '1997-03-19', 'Jake', 'Anderson', 'M', '2018-12-12'), 
+      (4, '1960-01-06', 'Jacob', 'Ford', 'M', '1995-03-27'), 
+      (5, '1955-11-30', 'Emilia', 'López', 'F', '1995-03-27'), 
+      (6, '1984-02-28', 'Anne', 'Brooks', 'F', '2004-07-01'), 
+      (7, '1970-04-22', 'Mary', 'Nichols', 'F', '2000-02-01'), 
+      (8, '1979-10-09', 'Anne', 'Biden', 'F', '2010-09-01'), 
+      (9, '1969-07-31', 'Anthony', 'Keyssar', 'M', '2001-11-11'), 
+      (10, '1990-08-12', 'Diana', 'Browning', 'F', '2010-05-16'), 
+      (11, '1989-09-11', 'Vincent', 'Waller', 'M', '2014-10-20'), 
+      (12, '1981-05-15', 'Anne', 'Wu', 'F', '2008-04-22'), 
+      (13, '1977-12-08', 'Albert', 'Kitroeff', 'M', '1999-12-31'), 
+      (14, '1995-07-03', 'Jennifer', 'Sánchez', 'F', '2019-06-03'), 
+      (15, '1982-09-23', 'Charles', 'Glueck', 'M', '2007-09-29');
+
+      
