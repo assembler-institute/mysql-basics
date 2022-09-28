@@ -254,13 +254,9 @@
     LIMIT 1
   );
   
-  -- ALTERNATIVE 2 --> ERROR: 'LIMIT & IN/ALL/ANY/SOME subquery' not supported by MariaDB
-  -- DELETE FROM departments 
-  --   WHERE dept_no IN (
-  --     SELECT dept_no, COUNT(DISTINCT emp_no) AS current_emp 
-  --     FROM dept_emp 
-  --     WHERE to_date >= CURDATE() 
-  --     GROUP BY dept_no
-  --     ORDER BY current_emp DESC 
-  --     LIMIT 1
-  --   );
+  -- ALTERNATIVE 2 with JOIN
+  DELETE employees , salaries
+  FROM employees
+  INNER JOIN salaries
+  ON salaries.emp_no = employees.emp_no AND salaries.salary > 20000;
+  
