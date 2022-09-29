@@ -66,7 +66,7 @@ select e.emp_no, e.first_name, s.salary from employees e left join salaries s on
 -- Seleccionar todos los empleados con salario entre 14000 y 50000
 select e.emp_no, e.first_name, s.salary from employees e left join salaries s on e.emp_no = s.emp_no where salary between 14000 and 50000;
 
--- seleccionar el numero total de empleados
+-- Seleccionar el numero total de empleados
 select emp_no from employees;
 
 -- Seleccionar el numero total de empleados que han trabajado en mas de un 
@@ -79,14 +79,24 @@ select * from titles where to_date like '2020%';
 -- Marcar en mayúscula los nombres de los empleados:
 select UPPER (first_name) first_name from employees;
 
+--Seleccionar el nombre, apellido y el departamento actual
+select e.first_name, e.last_name, d.dept_no, g.dept_name from employees e inner join dept_emp d on e.emp_no = d.emp_no
+inner join departments g on g.dept_no = d.emp_no;
+--segunda
+select  emp.first_name, emp.last_name, dep.dept_name
+from dept_emp as de
+inner join employees as emp on de.emp_no = emp.emp_no
+inner join departments as dep on de.dept_no = dep.dept_no;
+
 --Seleccionar el nombre, apellidos y número de veces que ha trabajado como directivo
 
 
 --Seleccionar el numero de empleados sin que se repita ninguno
-
+SELECT DISTINCT first_name FROM employees;
 
 -- DELETE DATA
 
 -- borrar a todos los empleados con salario superior a 20000
-
+delete employees from employees join salaries on e.emp_no = t.emp_no
+where salaries.salary > 20000;
 -- borrar el departamento que tiene mas empleados
