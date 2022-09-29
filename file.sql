@@ -60,6 +60,8 @@ UPDATE departments SET dept_name = 'newLogistica' where dept_no = 'Log';
 -- GET DATA
 
 -- Seleccionar todos los empleados con salario superior a 20000
+-- SELECT + LAS COLUMNAS QUE NOS QUEREMOS TRAER DE CADA TABLA + FROM + LA TABLA + LEFT JOIN + LA TABLA K VIENE
+-- + ON + LACOLUMNA DE UNION ENTRE LAS DOS TABLAS + LA CONDICION --> WHERE + CONDICION + ;
 select e.emp_no, e.first_name, s.salary from employees e left join salaries s on e.emp_no = s.emp_no where salary > 20000;
 -- Seleccionar todos los empleados con salario inferior a 10000
 select e.emp_no, e.first_name, s.salary from employees e left join salaries s on e.emp_no = s.emp_no where salary < 10000;
@@ -67,36 +69,51 @@ select e.emp_no, e.first_name, s.salary from employees e left join salaries s on
 select e.emp_no, e.first_name, s.salary from employees e left join salaries s on e.emp_no = s.emp_no where salary between 14000 and 50000;
 
 -- Seleccionar el numero total de empleados
+-- SELECT +  LA COLUMNA QUE QUEREMOS MOSTRAR + FROM + TABLA;
 select emp_no from employees;
 
--- Seleccionar el numero total de empleados que han trabajado en mas de un 
--- departamento
+-- Seleccionar el numero total de empleados que han trabajado en mas de un departamento
+-- SELECT + COUNT(LA COLUMNA DE LOS DATOS QUE SE CUENTEN) + COLUMNA QUE MOSTRAREMOS + FROM + TABLA + GROUP BY + la columna que se agrupa ;
 select count(dept_no) dept_name from departments group by dept_name;
 
 -- Seleccionar los titulos del 2020
+-- Uso del % depende de su colocación
 select * from titles where to_date like '2020%';
 
 -- Marcar en mayúscula los nombres de los empleados:
+--SELECT + UPPER--> INDICA MAYUSCULA, LOWER-->MINÚSCULA + (LA COLUMNA QUE SE MODIFICA) + LA COLUMNA QUE SE MUESTRA + FROM + TABLA + ;
 select UPPER (first_name) first_name from employees;
 
 --Seleccionar el nombre, apellido y el departamento actual
+--primera opción:
+-- = SELECCIONAR DE FORMA CRUZADA
 select e.first_name, e.last_name, d.dept_no, g.dept_name from employees e inner join dept_emp d on e.emp_no = d.emp_no
 inner join departments g on g.dept_no = d.emp_no;
---segunda
+--segunda: con as
 select  emp.first_name, emp.last_name, dep.dept_name
 from dept_emp as de
 inner join employees as emp on de.emp_no = emp.emp_no
 inner join departments as dep on de.dept_no = dep.dept_no;
 
 --Seleccionar el nombre, apellidos y número de veces que ha trabajado como directivo
-
+--SELECT + LAS TABLAS A MOSTRAR + COUNT(LA TABLA QUE MUESTRAEL CONTEO)
+select dept_manager.emp_no, employees.first_name, employees.last_name, COUNT(dept_manager.emp_no)
+FROM dept_manager --EN ESTA TABLA
+INNER JOIN employees --UNE ESTA OTRA TABLA
+ON employees.emp_no = dept_manager.emp_no -- SE UNEN POR AKI
+GROUP BY emp_no --AGRUPADA EN ESTA COLUMNA
+HAVING COUNT(dept_manager.emp_no); --QUE APAREZCA EL CONTEO DE ESTA TABLA EN ESTA COLUMNA
 
 --Seleccionar el numero de empleados sin que se repita ninguno
+-- SELECT + DISTINCT + COLUMNA + FROM + TABLA + ;
 SELECT DISTINCT first_name FROM employees;
 
 -- DELETE DATA
 
 -- borrar a todos los empleados con salario superior a 20000
-delete employees from employees join salaries on e.emp_no = t.emp_no
-where salaries.salary > 20000;
+delete employees -- BORRA DE ESTA TABLA
+from employees join salaries --DE LA UNION ENTRE ESTAS DOS TABLAS
+on employees.emp_no = salaries.emp_no --UNIDAS POR AKI
+where salaries.salary > 20000; --BORRA CUANDO DE LA TABLA ESTA, LA COLUMNA SEA SUPERIOR A 20000, EN ESTE CASO
 -- borrar el departamento que tiene mas empleados
+
