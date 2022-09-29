@@ -243,6 +243,13 @@
       WHERE S.salary > 20000 AND S.to_date >= CURDATE()
     );
 
+  -- ALTERNATIVE 2 with JOIN
+  DELETE employees , salaries
+  FROM employees
+  INNER JOIN salaries
+  ON salaries.emp_no = employees.emp_no AND salaries.salary > 20000;
+  
+  
   -- Remove the department that has the most employees.
   DELETE FROM departments 
   WHERE dept_no = (
@@ -253,10 +260,5 @@
     ORDER BY COUNT(DISTINCT emp_no) DESC 
     LIMIT 1
   );
-  
-  -- ALTERNATIVE 2 with JOIN
-  DELETE employees , salaries
-  FROM employees
-  INNER JOIN salaries
-  ON salaries.emp_no = employees.emp_no AND salaries.salary > 20000;
+ 
   
