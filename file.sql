@@ -74,7 +74,7 @@ select emp_no from employees;
 
 -- Seleccionar el numero total de empleados que han trabajado en mas de un departamento
 -- SELECT + COUNT(LA COLUMNA DE LOS DATOS QUE SE CUENTEN) + COLUMNA QUE MOSTRAREMOS + FROM + TABLA + GROUP BY + la columna que se agrupa ;
-select count(dept_no) dept_name from departments group by dept_name;
+select count(dept_no) dept_name from departments group by dept_name;                                 --agrupado por
 
 -- Seleccionar los titulos del 2020
 -- Uso del % depende de su colocación
