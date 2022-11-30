@@ -8,8 +8,10 @@ Intro pill which served as our first contact with the DBMS "MySQL", where we set
 
 ### 📂 Content
 
-This repository contains only the following files:
+This repository contains the following files:
 
-- **_README.md_**: this explanatory file.
+- **_insert.sql_**: all exercices related to the INSERT SQL command and data entry.
+- **_update.sql_**: all exercices related to the UPDATE SQL command and the data modification.
+- **_select.sql_**: all exercices related to the SELECT SQL command and the data filtering and selection.
+- **_delete.sql_**: all exercices related to the DELETE SQL command and the elimination of data.
 - **_employees.sql_**: file containing an example database provided by the official MySQL team, to import and use in our exercise.
-- **_queries.sql_**: file where we recorded all the necessary queries executed to fulfill this exercise.
