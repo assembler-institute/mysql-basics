@@ -1,0 +1,6 @@
+-- SIMPLE QUERIES 
+
+
+
+
+-- OWN DATABASE
