@@ -250,7 +250,7 @@ SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
 DROP TABLE IF EXISTS doctors,
                      patients,
                      doctor_patient,
-                     patient_history, 
+                     patient_visits, 
                      doctor_details;
 
 CREATE TABLE doctors (
@@ -283,7 +283,7 @@ CREATE TABLE doctor_patient (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE patient_history (
+CREATE TABLE patient_visits (
     id            INT AUTO_INCREMENT NOT NULL,
     patient_id    INT NOT NULL,
     p_date        DATE NOT NULL,
