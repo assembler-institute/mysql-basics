@@ -1,4 +1,4 @@
--- SIMPLE QUERIES
+-- ///////SIMPLE QUERIES
 
 -- INSERT DATA ----------------------------------------------------------------------------------------------------------------------------------------------
 -- departments
@@ -241,7 +241,7 @@ delete from departments
     (select m.dept_no from (select de.dept_no, COUNT(de.dept_no) times from dept_emp de group by de.dept_no) as m
 where m.times = (select max(s.times) from (select COUNT(dept_no) times from dept_emp group by dept_no) as s));
 
--- OWN DATABASE ------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- //////////////////OWN DATABASE 
 
 DROP DATABASE IF EXISTS doctors;
 CREATE DATABASE IF NOT EXISTS doctors;
