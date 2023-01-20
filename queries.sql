@@ -239,3 +239,65 @@ where m.times = (select max(s.times) from (select COUNT(dept_no) times from dept
 
 -- OWN DATABASE ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+DROP DATABASE IF EXISTS doctors;
+CREATE DATABASE IF NOT EXISTS doctors;
+USE doctors;
+SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
+DROP TABLE IF EXISTS doctors,
+                     patients,
+                     doctor_patient,
+                     patient_history, 
+                     doctor_details;
+
+CREATE TABLE doctors (
+    doctor_id   INT AUTO_INCREMENT NOT NULL,
+    first_name  VARCHAR(60) NOT NULL,
+    last_name   VARCHAR(60) NOT NULL,
+    dni         VARCHAR(12) NOT NULL,
+    PRIMARY KEY (doctor_id)
+);
+
+CREATE TABLE patients (
+    patient_id   INT AUTO_INCREMENT NOT NULL,
+    first_name  VARCHAR(60) NOT NULL,
+    last_name   VARCHAR(60) NOT NULL,
+    p_address   VARCHAR(255) NOT NULL,
+    dni         VARCHAR(12) NOT NULL,
+    birth_date  DATE NOT NULL,
+    tel         VARCHAR(12) NOT NULL,
+    PRIMARY KEY (patient_id)
+);
+
+CREATE TABLE doctor_patient (
+    id          INT AUTO_INCREMENT NOT NULL,
+    doctor_id   INT NOT NULL,
+    patient_id  INT NOT NULL,
+    d_date      DATE NOT NULL,
+    d_time      INT NOT NULL,
+    FOREIGN KEY (doctor_id)  REFERENCES doctors (doctor_id)  ON DELETE CASCADE,
+    FOREIGN KEY (patient_id) REFERENCES patients (patient_id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE patient_history (
+    id            INT AUTO_INCREMENT NOT NULL,
+    patient_id    INT NOT NULL,
+    p_date        DATE NOT NULL,
+    disease       VARCHAR (255) NOT NULL,
+    p_description TEXT NOT NULL,
+    FOREIGN KEY (patient_id) REFERENCES patients (patient_id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE doctor_details (
+    id          INT AUTO_INCREMENT NOT NULL,
+    doctor_id   INT NOT NULL,
+    tel         VARCHAR(12) NOT NULL,
+    birth_date  DATE NOT NULL,
+    mail        VARCHAR(100) NOT NULL,
+    d_address   VARCHAR(255) NOT NULL,
+    FOREIGN KEY (doctor_id) REFERENCES doctors (doctor_id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+);
+
+
