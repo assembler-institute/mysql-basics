@@ -23,7 +23,7 @@ insert into employees (emp_no, birth_date, first_name, last_name, gender, hire_d
     (3, '1997-08-26', 'Maria', 'Database', 'F', '2020-12-13'),
     (4, '1995-09-27', 'Pepita', 'Carrero', 'F', '2015-11-14'),
     (5, '1992-01-28', 'Angeles', 'Gutierrez', 'F', '2012-10-15'),
-    (6, '1993-02-29', 'Marco', 'Polo', 'M', '2011-04-16'),
+    (6, '1993-02-21', 'Marco', 'Polo', 'M', '2011-04-16'),
     (7, '1999-03-02', 'Victor', 'Krum', 'M', '2017-05-17'),
     (8, '1987-04-03', 'Hermione', 'Granger', 'F', '2018-02-18'),
     (9, '1983-05-04', 'Antonio', 'Junior', 'M', '2016-03-19'),
@@ -223,7 +223,7 @@ select
 -- salary more than 20000
 delete from salaries 
   where salary > 20000;
-  
+
 -- departments without use
 delete from departments 
   where dept_no 
@@ -238,3 +238,4 @@ delete from departments
 where m.times = (select max(s.times) from (select COUNT(dept_no) times from dept_emp group by dept_no) as s));
 
 -- OWN DATABASE ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
