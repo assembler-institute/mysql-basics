@@ -160,6 +160,64 @@ DELETE FROM salaries WHERE salary > 20000;
 
 DELETE FROM departments WHERE dept_no = (SELECT dept_no FROM dept_emp WHERE to_date >= CURDATE() GROUP BY dept_no ORDER BY COUNT(DISTINCT emp_no) DESC LIMIT 1);
 
+-- OWN DATABASE
+
+DROP DATABASE IF EXISTS shopping;
+CREATE DATABASE IF NOT EXISTS shopping;
+USE shopping;
+DROP TABLE IF EXISTS    line_items,
+                        customers,
+                        stock,
+                        products, 
+                        invoice;
+
+CREATE TABLE line_items (
+    invoice_id      INT AUTO_INCREMENT NOT NULL,
+    product_id      INT(20) NOT NULL,
+    unit price      INT(50) NOT NULL,
+    units           INT(20) NOT NULL,
+    product_name    VARCHAR(50) NOT NULL,
+    total           INT(20) NOT NULL,
+    PRIMARY KEY (invoice_id);
+);
+
+CREATE TABLE stock (
+    category_id         INT AUTO_INCREMENT NOT NULL,
+    category_name       VARCHAR(60) NOT NULL,
+    total_stock         INT(30) NOT NULL,
+    discount            INT(10) NOT NULL,
+    PRIMARY KEY (category_id)
+);
+
+CREATE TABLE products (
+    product_id      INT AUTO_INCREMENT NOT NULL,
+    product_name    VARCHAR(50) NOT NULL,
+    Unit price      INT (20) NOT NULL,
+    Stock           INT (20) NOT NULL,
+    category_id     INT (20) NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES stock (category_id) ON DELETE CASCADE,
+    PRIMARY KEY (product_id)
+);
+
+CREATE TABLE invoices (
+    customer_id   INT (20) NOT NULL,
+    invoice_id    INT (20) NOT NULL,
+    ordered_date  DATE NOT NULL,
+    subtotal      INT (20) NOT NULL,
+    discount      INT (20) NOT NULL,
+    FOREIGN KEY (invoice_id) REFERENCES line_items (invoice_id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE customers (
+    customers_id    INT AUTO_INCREMENT NOT NULL,
+    customers_name  VARCHAR(50) NOT NULL,
+    address_name    VARCHAR(50) NOT NULL,           
+    country         VARCHAR(50) NOT NULL,
+    phone           INT(12) NOT NULL,
+    region          VARCHAR(50) NOT NULL,
+    PRIMARY KEY (customers_id)
+);
 
 
 
