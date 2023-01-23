@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="PC-Shop" id="Project-1a9d" database="MySql" >
+	<schema name="pc-shop" >
+		<table name="article" prior="store_stock" >
+			<column name="id_article" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="article_name" type="VARCHAR" length="50" jt="12" />
+			<index name="pk_store_stock" unique="PRIMARY_KEY" >
+				<column name="id_article" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="client_invoices" prior="invoice" >
+			<column name="id_pay_method" type="INT" jt="4" />
+			<column name="customert-id" prior="client_id" type="INT" jt="4" />
+			<column name="invoice_no" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<fk name="fk_client_invoices_pay_methods" to_schema="pc-shop" to_table="pay_methods" >
+				<fk_column name="id_pay_method" pk="id_pay_methods" />
+			</fk>
+			<fk name="fk_client_invoices_clients" to_schema="pc-shop" to_table="customers" >
+				<fk_column name="customert-id" pk="customer_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="customers" prior="clients" >
+			<column name="first_name" type="VARCHAR" length="20" jt="12" />
+			<column name="last_name" type="VARCHAR" length="20" jt="12" />
+			<column name="birth_day" type="DATE" jt="91" />
+			<column name="email" type="VARCHAR" length="40" jt="12" />
+			<column name="customer_id" prior="client_id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="gender" type="ENUM" jt="12" />
+			<index name="pk_clients" unique="PRIMARY_KEY" >
+				<column name="customer_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="orders" prior="order" >
+			<column name="no_order" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="quantity" type="INT" jt="4" />
+			<column name="customer_id" prior="client_id" type="INT" jt="4" />
+			<column name="id_article" type="INT" jt="4" />
+			<index name="pk_pedidos" unique="PRIMARY_KEY" >
+				<column name="no_order" />
+			</index>
+			<fk name="fk_pedidos_clients" to_schema="pc-shop" to_table="customers" >
+				<fk_column name="customer_id" pk="customer_id" />
+			</fk>
+			<fk name="fk_pedidos_article" to_schema="pc-shop" to_table="article" >
+				<fk_column name="id_article" pk="id_article" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="pay_methods" prior="tbl" >
+			<column name="paypal" prior="cards" type="VARCHAR" length="40" jt="12" />
+			<column name="cards" prior="bank-transfer" type="INT" length="50" jt="4" >
+				<column_options><![CDATA[ON UPDATE CURRENT_TIMESTAMP]]></column_options>
+			</column>
+			<column name="id_pay_methods" prior="bank-transfers" type="INT" length="50" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="no_order" type="INT" jt="4" />
+			<column name="customer-id" prior="customert-id" type="INT" jt="4" />
+			<index name="pk_pay_methods" unique="PRIMARY_KEY" >
+				<column name="id_pay_methods" />
+			</index>
+			<fk name="fk_pay_methods_pedidos" to_schema="pc-shop" to_table="orders" >
+				<fk_column name="no_order" pk="no_order" />
+			</fk>
+			<fk name="fk_pay_methods_clients" to_schema="pc-shop" to_table="customers" >
+				<fk_column name="customer-id" pk="customer_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-21a2" show_relation="columns" >
+		<entity schema="pc-shop" name="article" color="C1D8EE" x="784" y="368" />
+		<entity schema="pc-shop" name="client_invoices" color="C1D8EE" x="48" y="48" />
+		<entity schema="pc-shop" name="customers" color="C1D8EE" x="416" y="400" />
+		<entity schema="pc-shop" name="orders" color="C1D8EE" x="608" y="64" />
+		<entity schema="pc-shop" name="pay_methods" color="C1D8EE" x="320" y="48" />
+	</layout>
+</project>
