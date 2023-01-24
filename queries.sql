@@ -162,8 +162,10 @@ SELECT UPPER(first_name) FROM employees;
 
 -- Select the name, surname and name of the current department of each employee
 
-SELECT first_name, last_name, dept_no FROM employees 
-    INNER JOIN dept_emp ON employees.emp_no = dept_emp.emp_no; 
+SELECT T.first_name, T.last_name, departments.dept_name FROM 
+    (SELECT first_name, last_name, dept_no FROM employees 
+    INNER JOIN dept_emp ON employees.emp_no = dept_emp.emp_no) AS T
+        INNER JOIN departments ON T.dept_no = departments.dept_no; 
 
 -- Select the name, surname and number of times the employee has worked as a manager
 
