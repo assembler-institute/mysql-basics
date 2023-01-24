@@ -1,15 +1,26 @@
-# 💊 MySQL Basics
+# 💊 MySQL Basics - Valentino Traverso
 
-_MySQL, SQL language, setting environment variables._
+This is the MySQL Basics project develop by Valentino Traverso.
 
-## 📔 Description
+## 📔 How its related my DB
 
-Intro pill which served as our first contact with the DBMS "MySQL", where we set an environment variable to be able to run the program from the command line, imported an example database from a ".sql" file provided by the official MySQL team, and executed some queries to play around with a DB and to getting familiar with the SQL language.
+I create a DB where i could save the data about my jobs.
 
-### 📂 Content
+### Tables
 
-This repository contains only the following files:
+- [Skills]
+Here its where i store my soft and hard skills.
+This table its related with all the jobs i had and with my titles.
 
-- **_README.md_**: this explanatory file.
-- **_employees.sql_**: file containing an example database provided by the official MySQL team, to import and use in our exercise.
-- **_queries.sql_**: file where we recorded all the necessary queries executed to fulfill this exercise.
+- [Titles]
+This one its use to save info about my education.
+Its related with my jobs because is where i used the knowledge aquire of each one.
+
+- [Jobs]
+In this one i store the jobs that i had and where im currently working.
+
+- [Partners]
+Here i could save the information about the people that use to work with me in evey jobs, thats the reason is connected to jobs table.
+
+- [Hobbies]
+This table is used to store my personal hobbies that i use to do when im free.
