@@ -232,14 +232,14 @@ delete from departments
     not in (select dept_no from dept_manager);
 
 -- department with more employees - 1 employee
-delete from departments 
-  where dept_no = (select s.dept_no from (select COUNT(dept_no) times, dept_no from dept_emp group by dept_no) as s having max(s.times));
+delete from departments where dept_no = (select dept_no times from dept_emp group by dept_no order by count(dept_no) desc limit 1);
+
 
 -- department with more employees (extra)
 delete from departments 
   where dept_no in 
     (select m.dept_no from (select de.dept_no, COUNT(de.dept_no) times from dept_emp de group by de.dept_no) as m
-where m.times = (select max(s.times) from (select COUNT(dept_no) times from dept_emp group by dept_no) as s));
+where m.times = (select max(s.times) from (select COUNT(dept_no) times from dept_emp group by dept_no) as s)); // 2,4,5,6
 
 -- //////////////////OWN DATABASE 
 
