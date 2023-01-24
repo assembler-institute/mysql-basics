@@ -26,13 +26,13 @@ Design with dbdesigner (https://app.dbdesigner.net/).
 To be able to succesfully finalize this project make sure you have a database management system (DMS) based in SQL such as MySQL. For those of you who already have XAMPP in your computer you don't need to download anything else for it already comes with a DMS. In my case it came with MariaDB Server. This is one of the most popular open source relational databases. It’s made by the original developers of MySQL so full compatibility.
 Only, make sure to look for the right syntax only when writing code according to the DMS version you have.
 
-To check whereas you have it already installed run this in your terminal (the syntax may vary depending, make sure you find it online it a syntax error occurs):
+To check whereas you have it already installed run this in your terminal (the syntax may vary depending, make sure you find it online if a syntax error occurs):
 
 ```
 ../bin/mysql --version
 ```
 
-This will return the version of the DMS you have. It it returns nothing or an error you will have to download a DMS.
+This will return the version of the DMS you have. If it returns nothing or an error you will have to download a DMS.
 
 Next we enter the DMS with this code:
 
@@ -71,7 +71,7 @@ and try now with:
 ../bin/mysql -u username -p
 ```
 
-we should be able to enter the password now, press enter and voilà, we shoul enter our user.
+we should be able to enter the password now, press enter and voilà, we should enter our user account.
 
 Next you need to download a tool to help you out with the visualization of the database and its tables. I used phpMyAdmin.
 It is a free software tool written in PHP, intended to handle the administration of MySQL over the Web. There are other softwares such as workbench but it doesn't work that well in mac.
