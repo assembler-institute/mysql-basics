@@ -240,8 +240,10 @@ CREATE TABLE teachers (
 
 CREATE TABLE subjects (
     id_subject INT NOT NULL AUTO_INCREMENT,
+    id_student INT NOT NULL,
     name_subject VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id_subject)
+    PRIMARY KEY (id_subject),
+    FOREIGN KEY (id_student) REFERENCES students(id_student) ON DELETE CASCADE
 );
 
 CREATE TABLE notes (
