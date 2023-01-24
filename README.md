@@ -1,4 +1,4 @@
-# 💊 MySQL Basics
+# MySQL Basics
 
 _MySQL, SQL language, setting environment variables._
 
@@ -13,3 +13,8 @@ This repository contains only the following files:
 - **_README.md_**: this explanatory file.
 - **_employees.sql_**: file containing an example database provided by the official MySQL team, to import and use in our exercise.
 - **_queries.sql_**: file where we recorded all the necessary queries executed to fulfill this exercise.
+- **_Diagram.jpg_**: database diagram.
+
+### DataBase diagram
+
+DataBase diagram in this repository
