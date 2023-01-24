@@ -19,6 +19,8 @@ This repository contains only the following files:
 
 ![Screenshot](database_company.png)
 
+Design with dbdesigner (https://app.dbdesigner.net/).
+
 ### THINGS TO HAVE IN MIND
 
 To be able to succesfully finalize this project make sure you have a database management system (DMS) based in SQL such as MySQL. For those of you who already have XAMPP in your computer you don't need to download anything else for it already comes with a DMS. In my case it came with MariaDB Server. This is one of the most popular open source relational databases. It’s made by the original developers of MySQL so full compatibility.
