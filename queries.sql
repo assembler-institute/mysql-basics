@@ -353,3 +353,29 @@ CREATE TABLE artist_prizes (
     FOREIGN KEY (artist_id) REFERENCES company (artist_id) ON DELETE CASCADE,
 	PRIMARY KEY (prize_id)
 );
+
+--CREATION OF INDEXES.
+--An index allow the system to find a query far quicker if it wasnt there. It saves in memory
+--the field we want to access. To create an index we can either do it from an ALTER statement
+--or directly creating the table:
+
+ALTER TABLE databaseName.tableName ADD INDEX(fieldName);
+
+--we can tell the system to only take into account a limited number of characters by
+--specifying it in the fieldName section.
+
+ALTER TABLE databaseName.tableName ADD INDEX(fieldName(20));
+
+--If it happens that due to the limitation the system finds two data with the same name
+--then it will search as if there wasn't any index whatsoever.
+
+CREATE TABLE tableName (
+	fieldName           INT             NOT NULL AUTO_INCREMENT,
+	fieldName           INT             NOT NULL,
+	fieldName           varchar(20)     NOT NULL,
+	fieldName           DATE            NOT NULL,
+    FOREIGN KEY (fieldName) REFERENCES tableName (fieldName) ON DELETE CASCADE,
+	PRIMARY KEY (fieldName)
+    INDEX fieldName,
+    INDEX fieldName
+);
