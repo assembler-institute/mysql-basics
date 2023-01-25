@@ -218,7 +218,8 @@ SELECT first_name FROM employees WHERE first_name REGEXP '^[A-Z][A-Za-z\s]*$'; -
 
 SELECT first_name, last_name, dept_name FROM employees, departments; -- select name, surname and department from each employee
 
-SELECT -- falta Select the name, surname and number of times the employee has worked as a manager
+SELECT first_name, last_name, COUNT(dept_no) FROM employees JOIN dept_manager on employees.emp_no = dept_manager.emp_no; --  Select the name, 
+    -- surname and number of times the employee has worked as a manager
 
 SELECT DISTINCT first_name from employees; -- names without any being repeated
 
@@ -230,6 +231,39 @@ JOIN salaries ON employees.emp_no = salaries.emp_no
 WHERE salaries.salary > 20000; -- delete employees with salary greater than 20000
 
 -- FALTA DELETE 2
+-- repassar
+DELETE FROM departments 
+WHERE dept_no IN (
+SELECT dept_no
+    FROM (
+        SELECT dept_no, COUNT(*) as c 
+        FROM dept_emp 
+        GROUP BY dept_no 
+        ORDER BY c DESC
+        LIMIT 1
+    )AS T);
+
+
+-- DELETE ALL EMPLOYEES WIT A SALARY GREATER THAN 20000
+
+DELETE employees FROM employees 
+JOIN salaries 
+ON salaries.emp_no = employees.emp_no
+WHERE salaries.salary > 20000;
+
+-- Remove the department that has more employees
+
+DELETE departments FROM
+  departments
+WHERE
+  dept_no = (
+        SELECT dept_no
+        FROM dept_emp
+        GROUP BY dept_no
+        ORDER BY COUNT(*) DESC
+        LIMIT 1
+       );
+
 
 -- Create DATABASE
 
