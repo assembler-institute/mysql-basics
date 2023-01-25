@@ -95,6 +95,8 @@ DELETE FROM `employees` WHERE `emp_no` IN (SELECT `emp_no` FROM `salaries` WHERE
 -- OR --
 DELETE FROM 'salaries' WHERE 'salary' > 20000; -- This deletes the entries from the salaries table
 
+
+
 DELETE FROM `departments` 
 WHERE `dept_no` IN (
 SELECT `dept_no`
@@ -105,6 +107,28 @@ SELECT `dept_no`
         ORDER BY c DESC
         LIMIT 1
     )AS T); -- Delete department with most employees
+
+
+-- DELETE ALL EMPLOYEES WIT A SALARY GREATER THAN 20000
+
+DELETE employees FROM employees 
+JOIN salaries 
+ON salaries.emp_no = employees.emp_no
+WHERE salaries.salary > 20000;
+
+-- Remove the department that has more employees
+
+DELETE departments FROM
+  departments
+WHERE
+  dept_no = (
+        SELECT dept_no
+        FROM dept_emp
+        GROUP BY dept_no
+        ORDER BY COUNT(*) DESC
+        LIMIT 1
+       );
+
 
 
 -- 1.5 DESIGN YOUR OWN DATABASE --
